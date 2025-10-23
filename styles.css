@@ -71,7 +71,7 @@ body {
     z-index: -1;
 }
 
-/* Content wrapper */
+/* Content wrapper - updated for new layout */
 .content-wrapper {
     position: relative;
     z-index: 1;
@@ -80,18 +80,14 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 0;
 }
 
-/* Content styles */
 .content {
-    text-align: center;
-    padding: 0 20px;
-    z-index: 10;
-    transition: transform 0.3s ease-out;
-    will-change: transform;
-    max-width: 800px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
-    position: relative;
+    padding: 0 2rem;
 }
 
 .name {
@@ -173,11 +169,31 @@ body {
     color: #fff;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    position: relative;
 }
 
 .nav-links a:hover {
     color: #3A8DFF;
+    background: rgba(58, 141, 255, 0.1);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 50%;
+    background-color: #3A8DFF;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+    width: 80%;
 }
 
 .social-links {
@@ -189,11 +205,19 @@ body {
     color: #fff;
     transition: all 0.3s ease;
     padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 .social-link:hover {
     color: #3A8DFF;
     transform: translateY(-2px);
+    background: rgba(58, 141, 255, 0.1);
+}
+
+.social-link:focus {
+    outline: 2px solid #3A8DFF;
+    outline-offset: 2px;
 }
 
 /* Hero Section */
@@ -220,6 +244,12 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    cursor: pointer;
+}
+
+.btn:focus {
+    outline: 2px solid #3A8DFF;
+    outline-offset: 2px;
 }
 
 .btn-primary {
@@ -401,11 +431,22 @@ main {
     color: #3A8DFF;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
 }
 
 .project-link:hover {
     color: #2a7acc;
+    background: rgba(58, 141, 255, 0.1);
+    border-color: rgba(58, 141, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.project-link:focus {
+    outline: 2px solid #3A8DFF;
+    outline-offset: 2px;
 }
 
 /* Contact Section */
@@ -422,26 +463,60 @@ main {
 .contact-links {
     display: flex;
     justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .contact-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(58, 141, 255, 0.1);
-    color: #3A8DFF;
     padding: 1rem 2rem;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
-    border: 1px solid rgba(58, 141, 255, 0.3);
+    border: 1px solid;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.contact-btn:hover {
+.email-btn {
+    background: rgba(234, 67, 53, 0.1);
+    color: #ea4435;
+    border-color: rgba(234, 67, 53, 0.3);
+}
+
+.email-btn:hover {
+    background: rgba(234, 67, 53, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(234, 67, 53, 0.2);
+    border-color: rgba(234, 67, 53, 0.5);
+}
+
+.github-btn {
+    background: rgba(58, 141, 255, 0.1);
+    color: #3A8DFF;
+    border-color: rgba(58, 141, 255, 0.3);
+}
+
+.github-btn:hover {
     background: rgba(58, 141, 255, 0.2);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(58, 141, 255, 0.2);
+    border-color: rgba(58, 141, 255, 0.5);
+}
+
+.contact-btn:focus {
+    outline: 2px solid;
+    outline-offset: 2px;
+}
+
+.email-btn:focus {
+    outline-color: #ea4435;
+}
+
+.github-btn:focus {
+    outline-color: #3A8DFF;
 }
 
 /* Footer */
@@ -454,6 +529,18 @@ main {
 
 .footer p {
     opacity: 0.7;
+    margin: 0.5rem 0;
+}
+
+.footer-link {
+    color: #3A8DFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #2a7acc;
+    text-decoration: underline;
 }
 
 /* Responsive Design */
@@ -487,16 +574,15 @@ main {
         grid-template-columns: 1fr;
     }
     
-    .projects-grid {
-        grid-template-columns: 1fr;
+    .contact-links {
+        flex-direction: column;
+        align-items: center;
     }
     
-    .container {
-        padding: 0 1rem;
-    }
-    
-    .section {
-        padding: 3rem 0;
+    .contact-btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
     }
 }
 

@@ -141,18 +141,18 @@ function initHoverEffects() {
 // Smooth scrolling for navigation links
 function initSmoothScrolling() {
     const navLinks = document.querySelectorAll('a[href^="#"]');
-    
+
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            
+
             if (targetSection) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
-                
+                const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
+                const targetPosition = targetSection.offsetTop - headerHeight - 20; // Extra 20px padding
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
