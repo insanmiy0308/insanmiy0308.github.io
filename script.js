@@ -1,115 +1,148 @@
-// Debug function to log errors and info
-function debugLog(message, data = null) {
-    const timestamp = new Date().toISOString();
-    console.log(`[${timestamp}] ${message}`, data || '');
-}
-
-// Main initialization function
-function init() {
-    try {
-        debugLog('Initializing website...');
+// Starfield with Parallax Effect
+class Starfield {
+    constructor(containerId, starCount = 500) {
+        this.container = document.getElementById(containerId);
+        this.starCount = starCount;
+        this.stars = [];
+        this.mouseX = 0;
+        this.mouseY = 0;
+        this.windowHalfX = window.innerWidth / 2;
+        this.windowHalfY = window.innerHeight / 2;
         
-        const starsContainer = document.getElementById('stars-container');
-        if (!starsContainer) {
-            throw new Error('Stars container element not found');
+        if (!this.container) {
+            console.error('Container element not found');
+            return;
         }
         
-        const starsCount = 350; // Number of stars
-        debugLog(`Creating ${starsCount} stars...`);
-        
+        this.init();
+    }
+    
+    init() {
         // Create stars
-        for (let i = 0; i < starsCount; i++) {
-            createStar(starsContainer);
+        for (let i = 0; i < this.starCount; i++) {
+            this.createStar();
         }
+        
+        // Mouse move effect
+        document.addEventListener('mousemove', (e) => this.onMouseMove(e));
         
         // Handle window resize
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                debugLog('Window resized, regenerating stars...');
-                // Remove existing stars
-                while (starsContainer.firstChild) {
-                    starsContainer.removeChild(starsContainer.firstChild);
-                }
-                // Create new stars
-                for (let i = 0; i < starsCount; i++) {
-                    createStar(starsContainer);
-                }
-            }, 200);
+            resizeTimeout = setTimeout(() => this.handleResize(), 200);
         });
         
-        // Add hover effect to text
-        const name = document.querySelector('.name');
-        const subtitle = document.querySelector('.subtitle');
-        
-        if (name && subtitle) {
-            name.addEventListener('mouseenter', () => {
-                debugLog('Name hovered');
-                subtitle.style.opacity = '1';
-                subtitle.style.transform = 'translateY(0)';
-            });
-            
-            name.addEventListener('mouseleave', () => {
-                debugLog('Name hover ended');
-                subtitle.style.opacity = '0.9';
-            });
-        } else {
-            debugLog('Warning: Name or subtitle elements not found', { name, subtitle });
-        }
-        
-        debugLog('Website initialization complete');
-    } catch (error) {
-        console.error('Error during initialization:', error);
-        debugLog('Initialization failed', { error: error.message, stack: error.stack });
+        // Initial animation frame
+        this.animate();
     }
-}
-
-function createStar(container) {
-    try {
+    
+    createStar() {
         const star = document.createElement('div');
-        star.className = 'star';
+        const layer = Math.floor(Math.random() * 3) + 1; // 1, 2, or 3
         
-        // Random size between 1-3px
-        const size = Math.random() * 2 + 1;
+        star.className = `star layer-${layer}`;
         
         // Random position
-        const posX = Math.random() * 100;
-        const posY = Math.random() * 100;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const z = Math.random() * 100; // Depth
         
-        // Random animation delay and duration
-        const delay = Math.random() * 5;
-        const duration = Math.random() * 3 + 2;
+        // Store star data for animation
+        const starData = {
+            element: star,
+            x,
+            y,
+            z,
+            speed: 0.1 + Math.random() * 0.1, // Base movement speed
+            layer
+        };
         
-        // Apply styles
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.left = `${posX}%`;
-        star.style.top = `${posY}%`;
-        star.style.animationDelay = `${delay}s`;
-        star.style.animationDuration = `${duration}s`;
+        // Initial position
+        this.positionStar(starData);
         
-        // Random opacity for variety
-        star.style.opacity = Math.random() * 0.5 + 0.2;
+        // Add to DOM and store reference
+        this.container.appendChild(star);
+        this.stars.push(starData);
+    }
+    
+    positionStar(star) {
+        // Apply parallax effect based on mouse position and depth
+        const x = star.x + (this.mouseX * star.layer * 0.1);
+        const y = star.y + (this.mouseY * star.layer * 0.1);
         
-        container.appendChild(star);
-    } catch (error) {
-        console.error('Error creating star:', error);
-        debugLog('Failed to create star', { error: error.message });
+        // Apply 3D transform for depth
+        const transform = `translate3d(${x}%, ${y}%, 0) scale(${1 + (star.layer * 0.2)})`;
+        
+        star.element.style.transform = transform;
+        star.element.style.opacity = 0.2 + (star.layer * 0.2);
+    }
+    
+    onMouseMove(event) {
+        // Normalize mouse position to -1 to 1 range
+        this.mouseX = (event.clientX - this.windowHalfX) / this.windowHalfX;
+        this.mouseY = (event.clientY - this.windowHalfY) / this.windowHalfY;
+    }
+    
+    handleResize() {
+        this.windowHalfX = window.innerWidth / 2;
+        this.windowHalfY = window.innerHeight / 2;
+    }
+    
+    animate() {
+        requestAnimationFrame(() => this.animate());
+        
+        // Update each star's position
+        this.stars.forEach(star => {
+            // Subtle movement based on depth
+            star.x += star.speed * 0.05;
+            
+            // Reset star position if it moves off screen
+            if (star.x > 100) {
+                star.x = -5;
+                star.y = Math.random() * 100;
+            }
+            
+            this.positionStar(star);
+        });
     }
 }
 
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-    debugLog('DOM fully loaded, starting initialization...');
-    init();
-});
+// Text hover effects
+function initHoverEffects() {
+    const name = document.querySelector('.name');
+    const subtitle = document.querySelector('.subtitle');
+    
+    if (name && subtitle) {
+        name.addEventListener('mousemove', (e) => {
+            const rect = name.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const angleX = (y - centerY) / 20;
+            const angleY = (centerX - x) / 20;
+            
+            name.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            subtitle.style.opacity = '1';
+            subtitle.style.transform = 'translateY(0) scale(1.02)';
+        });
+        
+        name.addEventListener('mouseleave', () => {
+            name.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            subtitle.style.opacity = '0.9';
+            subtitle.style.transform = 'translateY(0) scale(1)';
+        });
+    }
+}
 
-// Log any unhandled promise rejections
-window.addEventListener('unhandledrejection', (event) => {
-    console.error('Unhandled promise rejection:', event.reason);
-    debugLog('Unhandled Promise Rejection', { 
-        reason: event.reason?.message || 'Unknown error',
-        stack: event.reason?.stack
-    });
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize starfield
+    new Starfield('stars-container');
+    
+    // Initialize hover effects
+    initHoverEffects();
 });
