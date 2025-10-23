@@ -1,0 +1,96 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    color: #4C9EFF;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Star styles */
+.star {
+    position: absolute;
+    background-color: #4C9EFF;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 0.8; transform: scale(1); }
+}
+
+/* Content styles */
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.name {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.05em;
+    transition: all 0.3s ease;
+}
+
+.highlight {
+    color: #3A8DFF;
+    position: relative;
+    display: inline-block;
+}
+
+.highlight::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #3A8DFF;
+    transition: width 0.3s ease;
+}
+
+.name:hover .highlight::after {
+    width: 100%;
+}
+
+.subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    font-weight: 400;
+    max-width: 600px;
+    line-height: 1.6;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .name {
+        font-size: 3rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+}
