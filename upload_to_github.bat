@@ -65,7 +65,7 @@ if !remote_exists! EQU 1 (
 :: Push to GitHub
 echo.
 echo Pushing to GitHub...
-git push -u origin main
+git push -u origin master
 
 if !ERRORLEVEL! NEQ 0 (
     echo.
@@ -74,8 +74,8 @@ if !ERRORLEVEL! NEQ 0 (
     echo  Trying to create and push to main branch...
     echo ===========================================
     
-    git branch -M main
-    git push -u origin main
+    git branch -M master
+    git push -u origin master
     
     if !ERRORLEVEL! NEQ 0 (
         echo.
