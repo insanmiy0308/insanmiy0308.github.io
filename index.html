@@ -7,66 +7,42 @@
   <style>
     :root{
       --bg:#000000;
-      --panel:#071029;
       --accent:#1e6fff;
       --muted:#9fb3d6;
       --glass: rgba(255,255,255,0.03);
       --radius:14px;
-      color-scheme: dark;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,var(--bg) 0%, #04040a 100%);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background: linear-gradient(180deg,#000 0%, #04040a 100%);
       color:var(--muted);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      display:flex;align-items:center;justify-content:center;
-      padding:32px;
+      display:flex;align-items:center;justify-content:center;padding:32px;
     }
-
     .card{
-      width:100%;
-      max-width:860px;
+      width:100%;max-width:860px;
       background: linear-gradient(180deg, rgba(11,18,30,0.9), rgba(6,10,20,0.9));
-      border:1px solid rgba(30,111,255,0.08);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-      border-radius:var(--radius);
-      padding:28px;
-      display:grid;
-      grid-template-columns: 1fr 300px;
-      gap:20px;
-      align-items:start;
+      border-radius:var(--radius);padding:28px;display:grid;grid-template-columns:1fr 300px;gap:20px;
+      border:1px solid rgba(30,111,255,0.06);box-shadow:0 8px 30px rgba(0,0,0,0.6);
     }
-
-    header{display:flex;flex-direction:column;gap:8px;}
     .brand{display:flex;gap:12px;align-items:center;}
-    .logo{
-      width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0047b3);
-      display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:18px;
-      box-shadow:0 6px 18px rgba(30,111,255,0.12);
-    }
-    h1{margin:0;font-size:22px;color:var(--accent);letter-spacing:0.6px;}
-    p.lead{margin:0;color:var(--muted);font-size:14px}
-
-    .about{margin-top:12px;padding:16px;background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.02);color:#c6dbff;font-size:15px;line-height:1.45}
-
-    .server{margin-top:8px;padding:12px;border-radius:8px;background:linear-gradient(90deg, rgba(30,111,255,0.03), rgba(0,0,0,0));font-weight:600;color:var(--accent);cursor:pointer;user-select:none;}
-
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0047b3);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    h1{margin:0;color:var(--accent);font-size:22px}
+    p.lead{margin:0;color:var(--muted)}
+    .about{margin-top:12px;padding:16px;background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.02);color:#c6dbff;font-size:15px}
+    .music-box{margin-top:20px;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(30,111,255,0.04);text-align:center;font-size:15px;color:#cfe0ff;min-height:96px;display:flex;align-items:center;justify-content:center}
+    .meta{padding:18px;background:linear-gradient(180deg, rgba(14,23,38,0.6), rgba(7,12,20,0.6));border-radius:12px;border:1px solid rgba(30,111,255,0.06);display:flex;flex-direction:column;gap:12px}
+    .section-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+    ul.skills{list-style:none;padding:0;margin:6px 0 0 0;display:flex;flex-direction:column;gap:8px}
+    ul.skills li{background:rgba(30,111,255,0.06);padding:8px 10px;border-radius:8px;color:#bcd7ff;font-weight:600}
+    .server{margin-top:8px;padding:12px;border-radius:8px;background:linear-gradient(90deg, rgba(30,111,255,0.03), rgba(0,0,0,0));font-weight:600;color:var(--accent);cursor:pointer;user-select:none;text-align:center}
     footer{grid-column:1/-1;margin-top:12px;color:rgba(159,179,214,0.6);font-size:13px;display:flex;justify-content:space-between;align-items:center}
-
-    .music-box{margin-top:20px;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(30,111,255,0.05);text-align:center;font-size:15px;color:#cfe0ff;}
-
-    iframe.spotify {
-      width:100%;
-      min-height:360px;
-      border:none;
-      border-radius:12px;
-    }
-
-    @media (max-width:820px){.card{grid-template-columns:1fr;}}
+    button.cta{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
+    @media (max-width:820px){.card{grid-template-columns:1fr}}
+    a.track-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    a.track-link img{border-radius:8px}
   </style>
 </head>
 <body>
@@ -77,18 +53,23 @@
           <div class="logo">SK</div>
           <div>
             <h1>Made By Sektorrr</h1>
-            <p class="lead">developer • curious • building stuff</p>
+            <p class="lead">developer • Python, TypeScript, JavaScript, Lua — learning Java</p>
           </div>
         </div>
 
         <div class="about">
           <strong>About me</strong>
-          <p style="margin-top:8px">I have experience in Python, TypeScript, JavaScript, and Lua — currently learning Java. I'm working on my Minecraft server: <strong id="serverName">Fatality Network</strong>.</p>
+          <p style="margin-top:8px">Working on my Minecraft server: <strong>Fatality Network</strong>.</p>
         </div>
       </header>
 
-      <div class="music-box">
-        <iframe class="spotify" title="Spotify Embed: Recommendation Playlist" src="https://open.spotify.com/embed/playlist/5o8OHegYPlOSrdzB3BGRzm?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="music-box" id="nowPlaying">
+        <div id="nowPlayingInner">Loading Spotify status...</div>
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <button id="connectBtn" class="cta">Connect Spotify</button>
+        <button id="clearToken" style="background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--muted);cursor:pointer">Reset Token</button>
       </div>
     </div>
 
@@ -115,7 +96,11 @@
     </footer>
   </main>
 
+  <!-- spotify.js will handle auth + now-playing -->
+  <script src="spotify.js"></script>
+
   <script>
+    // copy server IP action
     const copyServer = document.getElementById('copyServer');
     if(copyServer){
       copyServer.addEventListener('click', ()=>{
