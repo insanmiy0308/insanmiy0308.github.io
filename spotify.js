@@ -1,57 +1,34 @@
-// spotify.js
-
-// 🔒 Store your token in localStorage so you don't need to paste it every refresh
-let accessToken = localStorage.getItem('spotify_access_token');
-
-// Prompt for token if none is stored
-if (!accessToken) {
-  accessToken = prompt("Enter your Spotify access token:");
-  if (accessToken) localStorage.setItem('spotify_access_token', accessToken);
-}
-
-// Function to fetch and show the current track
-async function getNowPlaying() {
+async function loadNowPlaying() {
   const box = document.getElementById("nowPlaying");
 
-  try {
-    const response = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+  // get token from your backend
+  const tokenRes = await fetch("/token");
+  const { access_token } = await tokenRes.json();
 
-    if (response.status === 204) {
-      box.innerHTML = "🎧 Nothing is playing right now.";
-      return;
+  const res = await fetch(
+    "https://api.spotify.com/v1/me/player/currently-playing",
+    {
+      headers: { Authorization: "Bearer " + access_token },
     }
+  );
 
-    if (!response.ok) {
-      box.innerHTML = "⚠️ Token expired or invalid. Please refresh it.";
-      localStorage.removeItem('spotify_access_token');
-      return;
-    }
+  if (res.status === 204) {
+    box.textContent = "Nothing playing right now.";
+    return;
+  }
 
-    const data = await response.json();
-    if (!data.item) {
-      box.innerHTML = "🎧 Nothing is playing right now.";
-      return;
-    }
-
-    const song = data.item.name;
-    const artist = data.item.artists.map(a => a.name).join(", ");
-    const image = data.item.album.images[0].url;
-    const url = data.item.external_urls.spotify;
-
+  const data = await res.json();
+  if (data && data.item) {
+    const { name, artists, album } = data.item;
+    const artistNames = artists.map((a) => a.name).join(", ");
     box.innerHTML = `
-      <a href="${url}" target="_blank" style="text-decoration:none;color:#1e6fff;display:flex;align-items:center;gap:10px;">
-        <img src="${image}" width="64" height="64" style="border-radius:8px;">
-        <span><strong>${song}</strong><br><small>${artist}</small></span>
-      </a>
+      <img src="${album.images[0].url}" width="64" style="border-radius:8px"><br>
+      <strong>${name}</strong><br>${artistNames}
     `;
-  } catch (err) {
-    console.error(err);
-    box.innerHTML = "❌ Error loading Spotify data.";
+  } else {
+    box.textContent = "Nothing playing right now.";
   }
 }
 
-// Run immediately and refresh every 15 seconds
-getNowPlaying();
-setInterval(getNowPlaying, 15000);
+loadNowPlaying();
+setInterval(loadNowPlaying, 15000); // refresh every 15s
