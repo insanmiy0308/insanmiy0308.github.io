@@ -1,198 +1,152 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sektorrr — Personal</title>
-  <style>
-    :root{
-      --bg:#000000;
-      --accent:#1e6fff;
-      --muted:#9fb3d6;
-      --glass: rgba(255,255,255,0.03);
-      --radius:14px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-      background: linear-gradient(180deg,#000 0%, #04040a 100%);
-      color:var(--muted);
-      display:flex;align-items:center;justify-content:center;padding:32px;
-    }
-    .card{
-      width:100%;max-width:860px;
-      background: linear-gradient(180deg, rgba(11,18,30,0.9), rgba(6,10,20,0.9));
-      border-radius:var(--radius);padding:28px;display:grid;grid-template-columns:1fr 300px;gap:20px;
-      border:1px solid rgba(30,111,255,0.06);box-shadow:0 8px 30px rgba(0,0,0,0.6);
-    }
-    .brand{display:flex;gap:12px;align-items:center;}
-    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0047b3);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-    h1{margin:0;color:var(--accent);font-size:22px}
-    p.lead{margin:0;color:var(--muted)}
-    .about{margin-top:12px;padding:16px;background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.02);color:#c6dbff;font-size:15px}
-    .music-box{margin-top:20px;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(30,111,255,0.04);text-align:center;font-size:15px;color:#cfe0ff;min-height:96px;display:flex;align-items:center;justify-content:center}
-    .meta{padding:18px;background:linear-gradient(180deg, rgba(14,23,38,0.6), rgba(7,12,20,0.6));border-radius:12px;border:1px solid rgba(30,111,255,0.06);display:flex;flex-direction:column;gap:12px}
-    .section-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-    ul.skills{list-style:none;padding:0;margin:6px 0 0 0;display:flex;flex-direction:column;gap:8px}
-    ul.skills li{background:rgba(30,111,255,0.06);padding:8px 10px;border-radius:8px;color:#bcd7ff;font-weight:600}
-    .server{margin-top:8px;padding:12px;border-radius:8px;background:linear-gradient(90deg, rgba(30,111,255,0.03), rgba(0,0,0,0));font-weight:600;color:var(--accent);cursor:pointer;user-select:none;text-align:center}
-    footer{grid-column:1/-1;margin-top:12px;color:rgba(159,179,214,0.6);font-size:13px;display:flex;justify-content:space-between;align-items:center}
-    button.cta{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
-    @media (max-width:820px){.card{grid-template-columns:1fr}}
-    a.track-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
-    a.track-link img{border-radius:8px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sektorrr — Personal</title>
+<style>
+  :root{
+    --bg:#000000;
+    --accent:#1e6fff;
+    --muted:#9fb3d6;
+    --glass: rgba(255,255,255,0.03);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    background: linear-gradient(180deg,#000 0%, #04040a 100%);
+    color:var(--muted);
+    display:flex;align-items:center;justify-content:center;padding:32px;
+  }
+  .card{
+    width:100%;max-width:860px;
+    background: linear-gradient(180deg, rgba(11,18,30,0.9), rgba(6,10,20,0.9));
+    border-radius:var(--radius);padding:28px;display:grid;grid-template-columns:1fr 300px;gap:20px;
+    border:1px solid rgba(30,111,255,0.06);box-shadow:0 8px 30px rgba(0,0,0,0.6);
+  }
+  .brand{display:flex;gap:12px;align-items:center;}
+  .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0047b3);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+  h1{margin:0;color:var(--accent);font-size:22px}
+  p.lead{margin:0;color:var(--muted)}
+  .about{margin-top:12px;padding:16px;background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.02);color:#c6dbff;font-size:15px}
+  .music-box{margin-top:20px;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(30,111,255,0.04);text-align:center;font-size:15px;color:#cfe0ff;min-height:96px;display:flex;align-items:center;justify-content:center}
+  .meta{padding:18px;background:linear-gradient(180deg, rgba(14,23,38,0.6), rgba(7,12,20,0.6));border-radius:12px;border:1px solid rgba(30,111,255,0.06);display:flex;flex-direction:column;gap:12px}
+  .section-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  ul.skills{list-style:none;padding:0;margin:6px 0 0 0;display:flex;flex-direction:column;gap:8px}
+  ul.skills li{background:rgba(30,111,255,0.06);padding:8px 10px;border-radius:8px;color:#bcd7ff;font-weight:600}
+  .server{margin-top:8px;padding:12px;border-radius:8px;background:linear-gradient(90deg, rgba(30,111,255,0.03), rgba(0,0,0,0));font-weight:600;color:var(--accent);cursor:pointer;user-select:none;text-align:center}
+  footer{grid-column:1/-1;margin-top:12px;color:rgba(159,179,214,0.6);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+  @media (max-width:820px){.card{grid-template-columns:1fr}}
+  a.track-link{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+  a.track-link img{border-radius:8px}
+</style>
 </head>
 <body>
-  <main class="card" role="main">
-    <div>
-      <header>
-        <div class="brand">
-          <div class="logo">SK</div>
-          <div>
-            <h1>Made By Sektorrr</h1>
-            <p class="lead">developer • Python, TypeScript, JavaScript, Lua — learning Java</p>
-          </div>
+<main class="card" role="main">
+  <div>
+    <header>
+      <div class="brand">
+        <div class="logo">SK</div>
+        <div>
+          <h1>Made By Sektorrr</h1>
+          <p class="lead">developer • Python, TypeScript, JavaScript, Lua — learning Java</p>
         </div>
-
-        <div class="about">
-          <strong>About me</strong>
-          <p style="margin-top:8px">Working on my Minecraft server: <strong>Fatality Network</strong>.</p>
-        </div>
-      </header>
-
-      <div class="music-box" id="nowPlaying">
-        <div id="nowPlayingInner">Loading Spotify status...</div>
       </div>
-
-      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
-        <button id="connectBtn" class="cta">Connect Spotify</button>
-        <button id="clearToken" style="background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 10px;border-radius:8px;color:var(--muted);cursor:pointer">Reset Token</button>
+      <div class="about">
+        <strong>About me</strong>
+        <p style="margin-top:8px">Working on my Minecraft server: <strong>Fatality Network</strong>.</p>
       </div>
+    </header>
+    <div class="music-box" id="nowPlaying">
+      <div id="nowPlayingInner">Loading Spotify status...</div>
     </div>
+  </div>
 
-    <aside class="meta" aria-label="sidebar">
-      <div>
-        <div class="section-title">skills</div>
-        <ul class="skills">
-          <li>Python</li>
-          <li>TypeScript</li>
-          <li>JavaScript</li>
-          <li>Lua</li>
-          <li>Learning: Java</li>
-        </ul>
-      </div>
+  <aside class="meta" aria-label="sidebar">
+    <div>
+      <div class="section-title">skills</div>
+      <ul class="skills">
+        <li>Python</li>
+        <li>TypeScript</li>
+        <li>JavaScript</li>
+        <li>Lua</li>
+        <li>Learning: Java</li>
+      </ul>
+    </div>
+    <div>
+      <div class="section-title">current</div>
+      <div class="server" id="copyServer">Working on: <span style="font-weight:800">Fatality Network</span></div>
+    </div>
+  </aside>
 
-      <div>
-        <div class="section-title">current</div>
-        <div class="server" id="copyServer">Working on: <span style="font-weight:800">Fatality Network</span></div>
-      </div>
-    </aside>
-
-    <footer>
-      <div>© <strong>Sektorrr</strong></div>
-    </footer>
-  </main>
+  <footer>
+    <div>© <strong>Sektorrr</strong></div>
+  </footer>
+</main>
 
 <script>
 const CLIENT_ID = '9f4d82dd36d94182a5df2f42c40d7639';
 const REDIRECT_URI = 'https://insanmiy.site/';
 const SCOPES = ['user-read-currently-playing','user-read-playback-state'];
-const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES.join('%20')}&show_dialog=true`;
 
-const nowPlayingInner = document.getElementById('nowPlayingInner');
-const connectBtn = document.getElementById('connectBtn');
-const clearBtn = document.getElementById('clearToken');
-
-function parseHash() {
+function getTokenFromUrl(){
   const hash = window.location.hash.substring(1);
   if(!hash) return null;
-  return hash.split('&').reduce((acc, pair) => {
-    const [k,v] = pair.split('=');
-    acc[k] = decodeURIComponent(v);
-    return acc;
-  }, {});
+  return hash.split('&').reduce((acc,p)=>{const [k,v]=p.split('=');acc[k]=decodeURIComponent(v);return acc},{});
 }
 
 function saveToken(token, expiresIn){
-  const expiry = Date.now() + (parseInt(expiresIn)*1000);
-  localStorage.setItem('spotify_access_token', token);
-  localStorage.setItem('spotify_token_expiry', expiry.toString());
-}
-
-function clearToken(){
-  localStorage.removeItem('spotify_access_token');
-  localStorage.removeItem('spotify_token_expiry');
-  nowPlayingInner.textContent = 'Spotify token cleared. Click Connect to authorize.';
+  localStorage.setItem('spotify_token', token);
+  localStorage.setItem('spotify_expiry', Date.now() + expiresIn*1000);
 }
 
 function getStoredToken(){
-  const token = localStorage.getItem('spotify_access_token');
-  const expiry = parseInt(localStorage.getItem('spotify_token_expiry')||'0');
-  if(!token || !expiry || Date.now()>expiry){
-    clearToken();
-    return null;
-  }
-  return token;
+  const t=localStorage.getItem('spotify_token');
+  const e=parseInt(localStorage.getItem('spotify_expiry')||'0');
+  return (!t||Date.now()>e)?null:t;
 }
 
-function tryConsumeUrlToken(){
-  const parsed = parseHash();
-  if(parsed && parsed.access_token){
-    saveToken(parsed.access_token, parsed.expires_in||3600);
-    history.replaceState(null, document.title, window.location.pathname + window.location.search);
-    return parsed.access_token;
-  }
-  return null;
-}
+function authorizeSpotify(){window.location.href=`https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES.join('%20')}&show_dialog=true`;}
 
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+// Handle token from URL
+const tokenData = getTokenFromUrl();
+if(tokenData && tokenData.access_token){ saveToken(tokenData.access_token, tokenData.expires_in||3600); window.location.hash=''; }
+
+const token = getStoredToken();
+const nowPlayingInner=document.getElementById('nowPlayingInner');
 
 async function updateNowPlaying(){
-  const token = getStoredToken();
-  if(!token){ nowPlayingInner.innerHTML='Not connected. Click <strong>Connect Spotify</strong>.'; return; }
-
+  const t=getStoredToken();
+  if(!t){ nowPlayingInner.innerHTML=`<a href="#" onclick="authorizeSpotify()">Authorize Spotify</a>`; return; }
   try{
-    const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing',{
-      headers:{Authorization:'Bearer '+token}
-    });
-    if(res.status===204){ nowPlayingInner.innerHTML='🎧 Nothing is playing right now.'; return; }
-    if(!res.ok){ clearToken(); nowPlayingInner.innerHTML='⚠️ Token expired or invalid. Click Connect.'; return; }
-    const data = await res.json();
-    if(!data || !data.item){ nowPlayingInner.innerHTML='🎧 Nothing is playing right now.'; return; }
+    const r=await fetch('https://api.spotify.com/v1/me/player/currently-playing',{headers:{Authorization:'Bearer '+t}});
+    if(r.status===204){ nowPlayingInner.textContent='🎧 Nothing is playing right now.'; return; }
+    if(!r.ok){ localStorage.removeItem('spotify_token'); nowPlayingInner.innerHTML=`⚠️ Token expired. <a href="#" onclick="authorizeSpotify()">Authorize again</a>`; return; }
+    const data=await r.json();
+    if(!data?.item){ nowPlayingInner.textContent='🎧 Nothing is playing right now.'; return; }
     const track=data.item;
-    const name=track.name;
-    const artists=track.artists.map(a=>a.name).join(', ');
-    const albumImg = track.album.images[0]?.url||'';
-    const url = track.external_urls.spotify||'#';
-    nowPlayingInner.innerHTML=`
-      <a class="track-link" href="${url}" target="_blank" rel="noopener noreferrer">
-        ${albumImg?`<img src="${albumImg}" width="64" height="64" alt="album art">`:''}
-        <div style="text-align:left">
-          <div style="font-weight:800;color:var(--accent)">${escapeHtml(name)}</div>
-          <div style="font-size:13px;color:var(--muted)">${escapeHtml(artists)}</div>
-        </div>
-      </a>
-    `;
-  }catch(e){console.error(e); nowPlayingInner.innerHTML='❌ Error loading Spotify data.';}
+    nowPlayingInner.innerHTML=`<a class="track-link" href="${track.external_urls.spotify}" target="_blank" rel="noopener noreferrer">
+      ${track.album.images[0]?`<img src="${track.album.images[0].url}" width="64" height="64">`:''}
+      <div style="text-align:left">
+        <div style="font-weight:800;color:var(--accent)">${track.name}</div>
+        <div style="font-size:13px;color:var(--muted)">${track.artists.map(a=>a.name).join(', ')}</div>
+      </div>
+    </a>`;
+  }catch(e){console.error(e); nowPlayingInner.textContent='❌ Error loading Spotify data.';}
 }
 
-// init
-tryConsumeUrlToken();
-if(getStoredToken()){updateNowPlaying(); setInterval(updateNowPlaying,15000);}
-else nowPlayingInner.innerHTML='Not connected. Click <strong>Connect Spotify</strong>.';
+updateNowPlaying();
+setInterval(updateNowPlaying,15000);
 
-connectBtn.addEventListener('click',()=>{window.location.href=AUTH_URL;});
-clearBtn.addEventListener('click',()=>{clearToken();});
-
-const copyServer = document.getElementById('copyServer');
-if(copyServer){copyServer.addEventListener('click',()=>{
+document.getElementById('copyServer').addEventListener('click',()=>{
   navigator.clipboard.writeText('FatalityNet.minehut.gg');
-  copyServer.textContent='Copied: FatalityNet.minehut.gg';
-  setTimeout(()=>copyServer.innerHTML='Working on: <span style="font-weight:800">Fatality Network</span>',2000);
-})}
+  const el=document.getElementById('copyServer');
+  el.textContent='Copied: FatalityNet.minehut.gg';
+  setTimeout(()=>el.innerHTML='Working on: <span style="font-weight:800">Fatality Network</span>',2000);
+});
 </script>
 </body>
 </html>
