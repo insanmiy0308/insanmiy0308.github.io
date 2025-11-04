@@ -6,9 +6,9 @@
   <title>Sektorrr — Personal</title>
   <style>
     :root{
-      --bg:#000000; /* black */
-      --panel:#071029; /* very dark blue */
-      --accent:#1e6fff; /* blue accent */
+      --bg:#000000;
+      --panel:#071029;
+      --accent:#1e6fff;
       --muted:#9fb3d6;
       --glass: rgba(255,255,255,0.03);
       --radius:14px;
@@ -41,46 +41,32 @@
       align-items:start;
     }
 
-    header{
-      display:flex;flex-direction:column;gap:8px;
-    }
-    .brand{
-      display:flex;gap:12px;align-items:center;
-    }
+    header{display:flex;flex-direction:column;gap:8px;}
+    .brand{display:flex;gap:12px;align-items:center;}
     .logo{
       width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0047b3);
       display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:18px;
       box-shadow:0 6px 18px rgba(30,111,255,0.12);
     }
-    h1{
-      margin:0;font-size:22px;color:var(--accent);
-      letter-spacing:0.6px;
-    }
+    h1{margin:0;font-size:22px;color:var(--accent);letter-spacing:0.6px;}
     p.lead{margin:0;color:var(--muted);font-size:14px}
 
-    .about{
-      margin-top:12px;padding:16px;background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.02);
-      color:#c6dbff;font-size:15px;line-height:1.45
-    }
+    .about{margin-top:12px;padding:16px;background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.02);color:#c6dbff;font-size:15px;line-height:1.45}
 
-    /* right column */
-    .meta{
-      padding:18px;background:linear-gradient(180deg, rgba(14,23,38,0.6), rgba(7,12,20,0.6));
-      border-radius:12px;border:1px solid rgba(30,111,255,0.06);
-      display:flex;flex-direction:column;gap:12px;align-items:stretch;
-    }
-    .section-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-    ul.skills{list-style:none;padding:0;margin:6px 0 0 0;display:flex;flex-direction:column;gap:8px}
-    ul.skills li{background:rgba(30,111,255,0.06);padding:8px 10px;border-radius:8px;color:#bcd7ff;font-weight:600;font-size:14px}
-
-    .server{margin-top:8px;padding:12px;border-radius:8px;background:linear-gradient(90deg, rgba(30,111,255,0.03), rgba(0,0,0,0));font-weight:600;color:var(--accent);}
+    .server{margin-top:8px;padding:12px;border-radius:8px;background:linear-gradient(90deg, rgba(30,111,255,0.03), rgba(0,0,0,0));font-weight:600;color:var(--accent);cursor:pointer;user-select:none;}
 
     footer{grid-column:1/-1;margin-top:12px;color:rgba(159,179,214,0.6);font-size:13px;display:flex;justify-content:space-between;align-items:center}
 
-    /* responsive */
-    @media (max-width:820px){
-      .card{grid-template-columns:1fr;}
+    .music-box{margin-top:20px;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(30,111,255,0.05);text-align:center;font-size:15px;color:#cfe0ff;}
+
+    iframe.spotify {
+      width:100%;
+      min-height:360px;
+      border:none;
+      border-radius:12px;
     }
+
+    @media (max-width:820px){.card{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
@@ -88,27 +74,22 @@
     <div>
       <header>
         <div class="brand">
-          <div class="logo">Sk</div>
+          <div class="logo">SK</div>
           <div>
-            <h1>Made by Sektorrr</h1>
+            <h1>Made By Sektorrr</h1>
             <p class="lead">developer • curious • building stuff</p>
           </div>
         </div>
 
         <div class="about">
           <strong>About me</strong>
-          <p style="margin-top:8px">I have experience in Python, TypeScript, JavaScript, and Lua — currently learning Java. I'm working on my Minecraft server: <strong>Fatality Network</strong>. This page is simple and straightforward.</p>
+          <p style="margin-top:8px">I have experience in Python, TypeScript, JavaScript, and Lua — currently learning Java. I'm working on my Minecraft server: <strong id="serverName">Fatality Network</strong>.</p>
         </div>
       </header>
 
-      <section style="margin-top:14px">
-        <h2 style="color:var(--muted);margin:0 0 8px 0;font-size:16px">Projects</h2>
-        <div style="padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.01)">
-          <p style="margin:0 0 8px 0;color:#cfe0ff">• Fatality Network — Minecraft server (in-progress)</p>
-          <p style="margin:0;color:#cfe0ff">• Various scripts, bots, and small tools in Python/JS/TS/Lua</p>
-        </div>
-      </section>
-
+      <div class="music-box">
+        <iframe class="spotify" title="Spotify Embed: Recommendation Playlist" src="https://open.spotify.com/embed/playlist/5o8OHegYPlOSrdzB3BGRzm?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
     </div>
 
     <aside class="meta" aria-label="sidebar">
@@ -125,16 +106,24 @@
 
       <div>
         <div class="section-title">current</div>
-        <div class="server">Working on: <span style="font-weight:800">Fatality Network</span></div>
+        <div class="server" id="copyServer">Working on: <span style="font-weight:800">Fatality Network</span></div>
       </div>
-
-      <div style="margin-top:auto;font-size:13px;color:var(--muted);">Want changes? Tell me what to tweak — colors, wording, or layout.</div>
     </aside>
 
     <footer>
-      <div>© <strong>sektorrr</strong></div>
-      <div style="opacity:0.9">Simple • Blue &amp; Black</div>
+      <div>© <strong>Sektorrr</strong></div>
     </footer>
   </main>
+
+  <script>
+    const copyServer = document.getElementById('copyServer');
+    if(copyServer){
+      copyServer.addEventListener('click', ()=>{
+        navigator.clipboard.writeText('FatalityNet.minehut.gg');
+        copyServer.textContent = 'Copied: FatalityNet.minehut.gg';
+        setTimeout(()=>copyServer.innerHTML = 'Working on: <span style="font-weight:800">Fatality Network</span>',2000);
+      });
+    }
+  </script>
 </body>
 </html>
