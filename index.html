@@ -53,7 +53,7 @@
           <div class="logo">SK</div>
           <div>
             <h1>Made By Sektorrr</h1>
-            <p class="lead">Python, TypeScript, JavaScript, Lua — learning Java</p>
+            <p class="lead">developer • Python, TypeScript, JavaScript, Lua — learning Java</p>
           </div>
         </div>
 
@@ -96,19 +96,103 @@
     </footer>
   </main>
 
-  <!-- spotify.js will handle auth + now-playing -->
-  <script src="spotify.js"></script>
+<script>
+const CLIENT_ID = '9f4d82dd36d94182a5df2f42c40d7639';
+const REDIRECT_URI = 'https://insanmiy.site';
+const SCOPES = ['user-read-currently-playing','user-read-playback-state'];
+const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES.join('%20')}&show_dialog=true`;
 
-  <script>
-    // copy server IP action
-    const copyServer = document.getElementById('copyServer');
-    if(copyServer){
-      copyServer.addEventListener('click', ()=>{
-        navigator.clipboard.writeText('FatalityNet.minehut.gg');
-        copyServer.textContent = 'Copied: FatalityNet.minehut.gg';
-        setTimeout(()=>copyServer.innerHTML = 'Working on: <span style="font-weight:800">Fatality Network</span>',2000);
-      });
-    }
-  </script>
+const nowPlayingInner = document.getElementById('nowPlayingInner');
+const connectBtn = document.getElementById('connectBtn');
+const clearBtn = document.getElementById('clearToken');
+
+function parseHash() {
+  const hash = window.location.hash.substring(1);
+  if(!hash) return null;
+  return hash.split('&').reduce((acc, pair) => {
+    const [k,v] = pair.split('=');
+    acc[k] = decodeURIComponent(v);
+    return acc;
+  }, {});
+}
+
+function saveToken(token, expiresIn){
+  const expiry = Date.now() + (parseInt(expiresIn)*1000);
+  localStorage.setItem('spotify_access_token', token);
+  localStorage.setItem('spotify_token_expiry', expiry.toString());
+}
+
+function clearToken(){
+  localStorage.removeItem('spotify_access_token');
+  localStorage.removeItem('spotify_token_expiry');
+  nowPlayingInner.textContent = 'Spotify token cleared. Click Connect to authorize.';
+}
+
+function getStoredToken(){
+  const token = localStorage.getItem('spotify_access_token');
+  const expiry = parseInt(localStorage.getItem('spotify_token_expiry')||'0');
+  if(!token || !expiry || Date.now()>expiry){
+    clearToken();
+    return null;
+  }
+  return token;
+}
+
+function tryConsumeUrlToken(){
+  const parsed = parseHash();
+  if(parsed && parsed.access_token){
+    saveToken(parsed.access_token, parsed.expires_in||3600);
+    history.replaceState(null, document.title, window.location.pathname + window.location.search);
+    return parsed.access_token;
+  }
+  return null;
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+async function updateNowPlaying(){
+  const token = getStoredToken();
+  if(!token){ nowPlayingInner.innerHTML='Not connected. Click <strong>Connect Spotify</strong>.'; return; }
+
+  try{
+    const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing',{
+      headers:{Authorization:'Bearer '+token}
+    });
+    if(res.status===204){ nowPlayingInner.innerHTML='🎧 Nothing is playing right now.'; return; }
+    if(!res.ok){ clearToken(); nowPlayingInner.innerHTML='⚠️ Token expired or invalid. Click Connect.'; return; }
+    const data = await res.json();
+    if(!data || !data.item){ nowPlayingInner.innerHTML='🎧 Nothing is playing right now.'; return; }
+    const track=data.item;
+    const name=track.name;
+    const artists=track.artists.map(a=>a.name).join(', ');
+    const albumImg = track.album.images[0]?.url||'';
+    const url = track.external_urls.spotify||'#';
+    nowPlayingInner.innerHTML=`
+      <a class="track-link" href="${url}" target="_blank" rel="noopener noreferrer">
+        ${albumImg?`<img src="${albumImg}" width="64" height="64" alt="album art">`:''}
+        <div style="text-align:left">
+          <div style="font-weight:800;color:var(--accent)">${escapeHtml(name)}</div>
+          <div style="font-size:13px;color:var(--muted)">${escapeHtml(artists)}</div>
+        </div>
+      </a>
+    `;
+  }catch(e){console.error(e); nowPlayingInner.innerHTML='❌ Error loading Spotify data.';}
+}
+
+// init
+tryConsumeUrlToken();
+if(getStoredToken()){updateNowPlaying(); setInterval(updateNowPlaying,15000);}
+else nowPlayingInner.innerHTML='Not connected. Click <strong>Connect Spotify</strong>.';
+
+connectBtn.addEventListener('click',()=>{window.location.href=AUTH_URL;});
+clearBtn.addEventListener('click',()=>{clearToken();});
+
+const copyServer = document.getElementById('copyServer');
+if(copyServer){copyServer.addEventListener('click',()=>{
+  navigator.clipboard.writeText('FatalityNet.minehut.gg');
+  copyServer.textContent='Copied: FatalityNet.minehut.gg';
+  setTimeout(()=>copyServer.innerHTML='Working on: <span style="font-weight:800">Fatality Network</span>',2000);
+})}
+</script>
 </body>
 </html>
