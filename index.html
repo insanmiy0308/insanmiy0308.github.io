@@ -1,173 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sektor / insanmiy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sektorrr — Personal</title>
+  <style>
+    :root{
+      --bg:#000000; /* black */
+      --panel:#071029; /* very dark blue */
+      --accent:#1e6fff; /* blue accent */
+      --muted:#9fb3d6;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg) 0%, #04040a 100%);
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;align-items:center;justify-content:center;
+      padding:32px;
+    }
+
+    .card{
+      width:100%;
+      max-width:860px;
+      background: linear-gradient(180deg, rgba(11,18,30,0.9), rgba(6,10,20,0.9));
+      border:1px solid rgba(30,111,255,0.08);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      border-radius:var(--radius);
+      padding:28px;
+      display:grid;
+      grid-template-columns: 1fr 300px;
+      gap:20px;
+      align-items:start;
+    }
+
+    header{
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .brand{
+      display:flex;gap:12px;align-items:center;
+    }
+    .logo{
+      width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0047b3);
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:18px;
+      box-shadow:0 6px 18px rgba(30,111,255,0.12);
+    }
+    h1{
+      margin:0;font-size:22px;color:var(--accent);
+      letter-spacing:0.6px;
+    }
+    p.lead{margin:0;color:var(--muted);font-size:14px}
+
+    .about{
+      margin-top:12px;padding:16px;background:var(--glass);border-radius:12px;border:1px solid rgba(255,255,255,0.02);
+      color:#c6dbff;font-size:15px;line-height:1.45
+    }
+
+    /* right column */
+    .meta{
+      padding:18px;background:linear-gradient(180deg, rgba(14,23,38,0.6), rgba(7,12,20,0.6));
+      border-radius:12px;border:1px solid rgba(30,111,255,0.06);
+      display:flex;flex-direction:column;gap:12px;align-items:stretch;
+    }
+    .section-title{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+    ul.skills{list-style:none;padding:0;margin:6px 0 0 0;display:flex;flex-direction:column;gap:8px}
+    ul.skills li{background:rgba(30,111,255,0.06);padding:8px 10px;border-radius:8px;color:#bcd7ff;font-weight:600;font-size:14px}
+
+    .server{margin-top:8px;padding:12px;border-radius:8px;background:linear-gradient(90deg, rgba(30,111,255,0.03), rgba(0,0,0,0));font-weight:600;color:var(--accent);}
+
+    footer{grid-column:1/-1;margin-top:12px;color:rgba(159,179,214,0.6);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+
+    /* responsive */
+    @media (max-width:820px){
+      .card{grid-template-columns:1fr;}
+    }
+  </style>
 </head>
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">Sektor / insanmiy</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="social-links">
-                <a href="https://github.com/insanmiy0308" target="_blank" class="social-link github" title="GitHub">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </a>
-            </div>
-        </nav>
-    </header>
-    <div class="content-wrapper">
-        <div class="content">
-            <div class="hero">
-                <h1 class="name">Sektor / <span class="highlight">insanmiy</span></h1>
-                <p class="subtitle">Developer experienced in Python, Lua, JavaScript, TypeScript — currently learning Java.</p>
-                <div class="hero-buttons">
-                    <a href="https://github.com/insanmiy0308" class="btn btn-primary" target="_blank">View GitHub</a>
-                    <a href="#projects" class="btn btn-secondary">View Projects</a>
-                </div>
-            </div>
+<body>
+  <main class="card" role="main">
+    <div>
+      <header>
+        <div class="brand">
+          <div class="logo">SR</div>
+          <div>
+            <h1>made by sektorrr</h1>
+            <p class="lead">developer • curious • building stuff</p>
+          </div>
         </div>
-    <main>
-        <section id="about" class="section">
-            <div class="container">
-                <h2>About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>Passionate developer with experience in multiple programming languages. I love creating innovative solutions and learning new technologies. Currently expanding my skills in Java while working on various projects.</p>
-                        <p>When I'm not coding, you can find me exploring new tech trends, contributing to open source projects, or working on personal development projects.</p>
-                    </div>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Languages</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">Projects</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">24/7</span>
-                            <span class="stat-label">Learning</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section id="skills" class="section">
-            <div class="container">
-                <h2>Skills & Technologies</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>Languages</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">TypeScript</span>
-                            <span class="skill-tag">Lua</span>
-                            <span class="skill-tag">Java</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Tools & Technologies</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">Node.js</span>
-                            <span class="skill-tag">HTML/CSS</span>
-                            <span class="skill-tag">VS Code</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="section">
-            <div class="container">
-                <h2>Featured Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-content">
-                            <h3>Portfolio Website</h3>
-                            <p>Interactive portfolio website with parallax effects and modern design</p>
-                            <div class="project-tags">
-                                <span class="project-tag">HTML</span>
-                                <span class="project-tag">CSS</span>
-                                <span class="project-tag">JavaScript</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/insanmiy0308/insanmiy0308.github.io" target="_blank" class="project-link">View Code</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-content">
-                            <h3>Python Projects</h3>
-                            <p>Various Python applications and automation scripts</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Python</span>
-                                <span class="project-tag">Automation</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/insanmiy0308?tab=repositories&q=python" target="_blank" class="project-link">View Projects</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-content">
-                            <h3>Learning Projects</h3>
-                            <p>Java and other language learning projects</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Java</span>
-                                <span class="project-tag">Learning</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/insanmiy0308?tab=repositories&q=java" target="_blank" class="project-link">View Projects</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section">
-            <div class="container">
-                <h2>Get In Touch</h2>
-                <div class="contact-content">
-                    <p>Interested in collaborating or have questions about my work?</p>
-                    <div class="contact-links">
-                        <a href="mailto:insanmiy0308@gmail.com" class="contact-btn email-btn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                            </svg>
-                            Email Me
-                        </a>
-                        <a href="https://github.com/insanmiy0308" target="_blank" class="contact-btn github-btn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                            GitHub Profile
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Sektor / insanmiy. Made with ❤️ and lots of ☕</p>
-            <p>Contact: <a href="mailto:insanmiy0308@gmail.com" class="footer-link">insanmiy0308@gmail.com</a></p>
+        <div class="about">
+          <strong>About me</strong>
+          <p style="margin-top:8px">I have experience in Python, TypeScript, JavaScript, and Lua — currently learning Java. I'm working on my Minecraft server: <strong>Fatality Network</strong>. This page is simple and straightforward.</p>
         </div>
+      </header>
+
+      <section style="margin-top:14px">
+        <h2 style="color:var(--muted);margin:0 0 8px 0;font-size:16px">Projects</h2>
+        <div style="padding:12px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.01)">
+          <p style="margin:0 0 8px 0;color:#cfe0ff">• Fatality Network — Minecraft server (in-progress)</p>
+          <p style="margin:0;color:#cfe0ff">• Various scripts, bots, and small tools in Python/JS/TS/Lua</p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="meta" aria-label="sidebar">
+      <div>
+        <div class="section-title">skills</div>
+        <ul class="skills">
+          <li>Python</li>
+          <li>TypeScript</li>
+          <li>JavaScript</li>
+          <li>Lua</li>
+          <li>Learning: Java</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="section-title">current</div>
+        <div class="server">Working on: <span style="font-weight:800">Fatality Network</span></div>
+      </div>
+
+      <div style="margin-top:auto;font-size:13px;color:var(--muted);">Want changes? Tell me what to tweak — colors, wording, or layout.</div>
+    </aside>
+
+    <footer>
+      <div>© <strong>sektorrr</strong></div>
+      <div style="opacity:0.9">Simple • Blue &amp; Black</div>
     </footer>
-    <script src="script.js"></script>
+  </main>
 </body>
 </html>
